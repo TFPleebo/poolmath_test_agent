@@ -115,6 +115,7 @@ async function callOpenAI(poolData, apiKey) {
     : JSON.stringify(poolData, null, 2);
 
   const payload = {
+    model: "o3",
     prompt: {
       id: OPENAI_PROMPT_ID,
       version: OPENAI_PROMPT_VERSION,

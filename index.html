@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pool Advisor</title>
+  <meta name="theme-color" content="#ffffff" />
+  <title>PoolMath Advisor</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -19,6 +20,7 @@
       color: #1a1a1a;
     }
 
+    /* ── Header ── */
     header {
       text-align: center;
       margin-bottom: 36px;
@@ -29,14 +31,23 @@
       font-weight: 700;
       color: #0077b6;
       letter-spacing: -0.5px;
+      text-wrap: balance;
     }
 
     header p {
       margin-top: 8px;
       font-size: 0.95rem;
       color: #555;
+      text-wrap: pretty;
     }
 
+    header .tagline {
+      margin-top: 4px;
+      font-size: 0.82rem;
+      color: #93a3b1;
+    }
+
+    /* ── Card ── */
     .card {
       width: 100%;
       max-width: 640px;
@@ -62,18 +73,20 @@
 
     input[type="text"] {
       flex: 1;
+      min-width: 0;
       padding: 11px 14px;
       font-size: 0.95rem;
       border: 1px solid #cbd5e1;
       border-radius: 8px;
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s;
       color: #1a1a1a;
+      touch-action: manipulation;
     }
 
-    input[type="text"]:focus {
+    input[type="text"]:focus-visible {
       border-color: #0077b6;
-      box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.12);
+      box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.15);
     }
 
     input[type="text"]::placeholder {
@@ -91,66 +104,130 @@
       cursor: pointer;
       white-space: nowrap;
       transition: background 0.2s, opacity 0.2s;
+      touch-action: manipulation;
     }
 
     button:hover:not(:disabled) { background: #005f8e; }
+    button:focus-visible {
+      outline: 3px solid #0077b6;
+      outline-offset: 2px;
+    }
     button:disabled { opacity: 0.55; cursor: not-allowed; }
 
     .hint {
       margin-top: 8px;
       font-size: 0.78rem;
       color: #888;
+      line-height: 1.5;
     }
 
-    /* Response area */
+    /* ── Thinking state ── */
+    .thinking-state {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 20px;
+      background: #f0f7ff;
+      border: 1px solid #c8e0f4;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #0077b6;
+    }
+
+    .thinking-dots {
+      display: flex;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .thinking-dots span {
+      width: 6px;
+      height: 6px;
+      background: #0077b6;
+      border-radius: 50%;
+      animation: dot-bounce 1.2s ease-in-out infinite;
+    }
+
+    .thinking-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .thinking-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes dot-bounce {
+      0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+      40%            { transform: translateY(-5px); opacity: 1; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .thinking-dots span { animation: none; opacity: 0.7; }
+    }
+
+    /* ── Response area ── */
     #response-area {
       margin-top: 24px;
       display: none;
     }
 
-    .response-box {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      padding: 18px 20px;
-      font-size: 0.93rem;
-      line-height: 1.7;
-      color: #1a1a1a;
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-
-    .response-label {
-      font-size: 0.78rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #0077b6;
+    .response-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       margin-bottom: 10px;
     }
 
-    /* Loading spinner */
-    .spinner {
-      display: inline-block;
-      width: 18px;
-      height: 18px;
-      border: 2px solid rgba(255,255,255,0.4);
-      border-top-color: #fff;
-      border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-      vertical-align: middle;
-      margin-right: 6px;
+    .response-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: #0077b6;
+      background: #e8f4fd;
+      padding: 3px 8px;
+      border-radius: 99px;
     }
-    @keyframes spin { to { transform: rotate(360deg); } }
 
-    .error { color: #c0392b; }
+    .response-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-left: 3px solid #0077b6;
+      border-radius: 8px;
+      padding: 18px 20px;
+      font-size: 0.97rem;
+      line-height: 1.75;
+      color: #1a1a1a;
+      word-break: break-word;
+    }
+
+    /* ── Error state ── */
+    .error-box {
+      background: #fff5f5;
+      border: 1px solid #f5c6c6;
+      border-left: 3px solid #c0392b;
+      border-radius: 8px;
+      padding: 16px 20px;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #7b1f1f;
+    }
+
+    .error-box strong {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #c0392b;
+    }
+
+    .error-box .error-fix {
+      font-size: 0.84rem;
+      color: #9b3b3b;
+      margin-top: 6px;
+    }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>🏊 Pool Advisor</h1>
-    <p>Paste your Pool Math share code and get personalized advice.</p>
+    <h1>PoolMath Advisor</h1>
+    <p>Your TFP-based pool chemistry coach, powered by AI.</p>
+    <p class="tagline">Paste your Pool Math share code below for a personalized read on your water.</p>
   </header>
 
   <div class="card">
@@ -159,7 +236,8 @@
       <input
         type="text"
         id="share-code"
-        placeholder="e.g. aB3xYz or full URL"
+        name="pool-share-code"
+        placeholder="e.g. aB3xYz or full URL…"
         autocomplete="off"
         autocorrect="off"
         spellcheck="false"
@@ -171,48 +249,97 @@
       Paste the full URL or just the last part.
     </p>
 
-    <div id="response-area">
-      <div class="response-label">Pool Advisor</div>
-      <div class="response-box" id="response-text"></div>
+    <div id="response-area" aria-live="polite">
+      <!-- Content injected by JS -->
     </div>
   </div>
 
   <script>
     const WORKER_URL = "https://pool-advisor-proxy.9r568xhjmx.workers.dev";
 
+    // Thinking messages that cycle while waiting
+    const THINKING_STEPS = [
+      "Fetching your pool data from Pool Math…",
+      "Reading your chemistry history…",
+      "Analyzing your water balance…",
+      "Writing your advice…",
+    ];
+
     function extractShareCode(input) {
-      input = input.trim().replace(/\/+$/, ""); // strip trailing slashes
-      // If it looks like a URL, grab the last path segment
+      input = input.trim().replace(/\/+$/, "");
       try {
         const url = new URL(input.startsWith("http") ? input : "https://" + input);
         const parts = url.pathname.split("/").filter(Boolean);
         if (parts.length > 0) return parts[parts.length - 1];
       } catch (_) {}
-      // Otherwise treat as raw share code
       return input;
+    }
+
+    function showThinking(stepIndex) {
+      const msg = THINKING_STEPS[Math.min(stepIndex, THINKING_STEPS.length - 1)];
+      return `
+        <div class="thinking-state" role="status">
+          <div class="thinking-dots" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+          <span>${msg}</span>
+        </div>`;
+    }
+
+    function showAdvice(text) {
+      return `
+        <div class="response-header">
+          <span class="response-badge">TFP Guide</span>
+        </div>
+        <div class="response-box">${escapeHtml(text)}</div>`;
+    }
+
+    function showError(title, fix) {
+      return `
+        <div class="error-box" role="alert">
+          <strong>${escapeHtml(title)}</strong>
+          <p class="error-fix">${escapeHtml(fix)}</p>
+        </div>`;
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
     }
 
     async function analyze() {
       const rawInput = document.getElementById("share-code").value;
       const btn = document.getElementById("analyze-btn");
       const responseArea = document.getElementById("response-area");
-      const responseText = document.getElementById("response-text");
 
       if (!rawInput.trim()) {
         responseArea.style.display = "block";
-        responseText.className = "response-box error";
-        responseText.textContent = "Please enter your Pool Math share code or URL.";
+        responseArea.innerHTML = showError(
+          "No share code entered.",
+          "Open the Pool Math app → Settings → Share, enable sharing, and paste the link or code here."
+        );
         return;
       }
 
       const shareCode = extractShareCode(rawInput);
 
-      // Loading state
+      // Start loading — cycle through thinking messages
       btn.disabled = true;
-      btn.innerHTML = '<span class="spinner"></span>Analyzing…';
+      btn.textContent = "Analyzing…";
       responseArea.style.display = "block";
-      responseText.className = "response-box";
-      responseText.textContent = "Fetching your pool data…";
+
+      let step = 0;
+      responseArea.innerHTML = showThinking(step);
+
+      const thinkingInterval = setInterval(() => {
+        step++;
+        if (step < THINKING_STEPS.length) {
+          responseArea.innerHTML = showThinking(step);
+        }
+      }, 2800);
 
       try {
         const res = await fetch(WORKER_URL, {
@@ -221,25 +348,67 @@
           body: JSON.stringify({ shareCode }),
         });
 
+        clearInterval(thinkingInterval);
+
+        if (res.status === 404) {
+          responseArea.innerHTML = showError(
+            "Share code not found.",
+            "Double-check the code in Pool Math app → Settings → Share. Make sure sharing is enabled."
+          );
+          return;
+        }
+
+        if (res.status === 429) {
+          responseArea.innerHTML = showError(
+            "Too many requests — please wait a moment.",
+            "Try again in 30 seconds."
+          );
+          return;
+        }
+
         if (!res.ok) {
-          const err = await res.text();
-          throw new Error(`Worker error ${res.status}: ${err}`);
+          const errText = await res.text();
+          // Surface the actual OpenAI / worker error cleanly
+          let detail = "Try again in a moment.";
+          try {
+            const j = JSON.parse(errText);
+            if (j.error) detail = j.error;
+          } catch (_) {
+            if (errText.length < 200) detail = errText;
+          }
+          responseArea.innerHTML = showError("Something went wrong.", detail);
+          return;
         }
 
         const data = await res.json();
-        responseText.className = "response-box";
-        responseText.textContent = data.advice || data.message || JSON.stringify(data, null, 2);
+        const advice = data.advice || data.message;
+
+        if (!advice) {
+          responseArea.innerHTML = showError(
+            "No advice was returned.",
+            "The AI responded but didn't produce a result. Try again — if this keeps happening, your pool data may be empty."
+          );
+          return;
+        }
+
+        responseArea.innerHTML = showAdvice(advice);
 
       } catch (err) {
-        responseText.className = "response-box error";
-        responseText.textContent = "Something went wrong: " + err.message;
+        clearInterval(thinkingInterval);
+        // Network-level failure
+        const isOffline = !navigator.onLine;
+        responseArea.innerHTML = showError(
+          isOffline ? "You appear to be offline." : "Could not reach the advisor.",
+          isOffline
+            ? "Check your internet connection and try again."
+            : "This is usually temporary. Wait a few seconds and try again."
+        );
       } finally {
         btn.disabled = false;
-        btn.innerHTML = "Analyze";
+        btn.textContent = "Analyze";
       }
     }
 
-    // Allow Enter key to submit
     document.getElementById("share-code").addEventListener("keydown", (e) => {
       if (e.key === "Enter") analyze();
     });

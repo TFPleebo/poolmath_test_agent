@@ -3,48 +3,63 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#ffffff" />
+  <meta name="theme-color" content="#cce8f7" />
+  <meta name="description" content="TFP-based pool chemistry coaching powered by AI. Paste your Pool Math share code for a personalized read on your water." />
+  <link rel="preconnect" href="https://pool-advisor-proxy.9r568xhjmx.workers.dev" />
   <title>PoolMath Advisor</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: #ffffff;
+      background: linear-gradient(170deg, #cce8f7 0%, #dff0fb 30%, #edf6fc 65%, #f2f8fd 100%);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      padding: 60px 20px 40px;
+      padding: 64px 20px 48px;
       color: #1a1a1a;
     }
 
     /* ── Header ── */
     header {
       text-align: center;
-      margin-bottom: 36px;
+      margin-bottom: 44px;
+    }
+
+    .logo-icon {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 18px;
+      filter: drop-shadow(0 4px 12px rgba(0, 100, 170, 0.22));
     }
 
     header h1 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #0077b6;
-      letter-spacing: -0.5px;
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: #004e80;
+      letter-spacing: -0.8px;
       text-wrap: balance;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.5);
     }
 
-    header p {
-      margin-top: 8px;
-      font-size: 0.95rem;
-      color: #555;
+    header .subtitle {
+      margin-top: 10px;
+      font-size: 1rem;
+      color: #2d6e92;
+      font-weight: 400;
       text-wrap: pretty;
     }
 
     header .tagline {
-      margin-top: 4px;
-      font-size: 0.82rem;
-      color: #93a3b1;
+      margin-top: 16px;
+      font-size: 0.84rem;
+      color: #5a8aa8;
+      line-height: 1.55;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     /* ── Card ── */
@@ -52,11 +67,27 @@
       width: 100%;
       max-width: 640px;
       background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
+      border: 1px solid #cee3f0;
+      border-radius: 14px;
       padding: 28px;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 4px 28px rgba(0, 100, 160, 0.11), 0 1px 4px rgba(0,0,0,0.04);
     }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 36px;
+      font-size: 0.75rem;
+      color: #7aaabf;
+      text-align: center;
+      letter-spacing: 0.01em;
+    }
+
+    footer a {
+      color: #0077b6;
+      text-decoration: none;
+    }
+
+    footer a:hover { text-decoration: underline; }
 
     label {
       display: block;
@@ -225,8 +256,20 @@
 <body>
 
   <header>
+    <div class="logo-icon">
+      <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M26 5C26 5 10 22 10 32C10 40.837 17.163 48 26 48C34.837 48 42 40.837 42 32C42 22 26 5 26 5Z" fill="url(#dropGrad)"/>
+        <path d="M18.5 35C18.5 31.5 20.8 28.5 26 26.5" stroke="rgba(255,255,255,0.45)" stroke-width="2.2" stroke-linecap="round"/>
+        <defs>
+          <linearGradient id="dropGrad" x1="26" y1="5" x2="26" y2="48" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#55c0e8"/>
+            <stop offset="100%" stop-color="#005f91"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
     <h1>PoolMath Advisor</h1>
-    <p>Your TFP-based pool chemistry coach, powered by AI.</p>
+    <p class="subtitle">Your TFP-based pool chemistry coach, powered by AI.</p>
     <p class="tagline">Paste your Pool Math share code below for a personalized read on your water.</p>
   </header>
 
@@ -253,6 +296,10 @@
       <!-- Content injected by JS -->
     </div>
   </div>
+
+  <footer>
+    Built on <a href="https://www.troublefreepool.com" target="_blank" rel="noopener noreferrer">TroubleFreePool</a> methodology
+  </footer>
 
   <script>
     const WORKER_URL = "https://pool-advisor-proxy.9r568xhjmx.workers.dev";

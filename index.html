@@ -227,6 +227,10 @@
       word-break: break-word;
     }
 
+    .response-box p + p {
+      margin-top: 1em;
+    }
+
     /* ── Error state ── */
     .error-box {
       background: #fff5f5;
@@ -334,11 +338,16 @@
     }
 
     function showAdvice(text) {
+      // Convert paragraph breaks into HTML so they render correctly
+      const html = text
+        .split(/\n\n+/)
+        .map(para => `<p>${escapeHtml(para.trim())}</p>`)
+        .join("");
       return `
         <div class="response-header">
           <span class="response-badge">TFP Guide</span>
         </div>
-        <div class="response-box">${escapeHtml(text)}</div>`;
+        <div class="response-box">${html}</div>`;
     }
 
     function showError(title, fix) {

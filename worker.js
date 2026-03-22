@@ -12,7 +12,7 @@
  */
 
 const OPENAI_PROMPT_ID      = "pmpt_691b90f820808195abb5b4dbfe81d70503cb71164e237c44";
-const OPENAI_PROMPT_VERSION = "2";
+const OPENAI_PROMPT_VERSION = "15";
 const OPENAI_VECTOR_STORE   = "vs_hKTsOCNCResFZYaPXtuBuo6R";
 
 // Allow any origin so the page works when opened locally (file://) AND from GitHub Pages.

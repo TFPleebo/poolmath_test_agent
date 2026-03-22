@@ -83,7 +83,7 @@ export default {
  * Adjust the parsing below if the response shape differs.
  */
 async function fetchPoolMathData(shareCode) {
-  const url = `https://troublefreepool.com/mypool/${encodeURIComponent(shareCode)}`;
+  const url = `https://api.poolmathapp.com/share/${encodeURIComponent(shareCode)}.json`;
   const res = await fetch(url, {
     headers: {
       Accept: "application/json",

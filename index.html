@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#cce8f7" />
-  <meta name="description" content="TFP-based pool chemistry guide. Paste your Pool Math share code for a personalized read on your water." />
+  <meta name="description" content="Your TFP-based pool chemistry guide. Paste your Pool Math share code for a personalized read on your water." />
   <link rel="preconnect" href="https://pool-advisor-proxy.9r568xhjmx.workers.dev" />
   <title>PoolMath Advisor</title>
   <style>
@@ -273,8 +273,9 @@
       </svg>
     </div>
     <h1>PoolMath Advisor</h1>
-    <p class="subtitle">Your TFP-based pool chemistry coach, powered by AI.</p>
+    <p class="subtitle">Your TFP-based pool chemistry guide.</p>
     <p class="tagline">Paste your Pool Math share code below for a personalized read on your water.</p>
+    <p class="tagline" style="margin-top:10px; font-size:0.85rem; color:#5a8fa8;">This tool is still in testing. Responses may contain errors — always double-check before acting on any advice. We are actively reviewing results as we work toward a broader release.</p>
   </header>
 
   <div class="card">
@@ -340,8 +341,10 @@
     function showAdvice(text) {
       // Convert paragraph breaks into HTML so they render correctly
       const html = text
-        .split(/\n\n+/)
-        .map(para => `<p>${escapeHtml(para.trim())}</p>`)
+        .split(/\n+/)
+        .map(para => para.trim())
+        .filter(para => para.length > 0)
+        .map(para => `<p>${escapeHtml(para)}</p>`)
         .join("");
       return `
         <div class="response-header">

@@ -30,8 +30,12 @@ The Advisor pulls your recent test history and chemical additions directly from 
 |------|-------------|
 | `index.html` | The entire frontend — single-file, no dependencies |
 | `worker.js` | Cloudflare Worker proxy |
-| `pool_chemistry_knowledge.md` | TFP knowledge base uploaded to the OpenAI vector store |
+| `pool_chemistry_knowledge.md` | TFP general knowledge base uploaded to the OpenAI vector store |
 | `poolmath_system_prompt_v*.md` | Versioned system prompts |
+| `pool_csi_guide_2026-03-28` | CSI knowledge base uploaded to OpenAI vector store |
+| `pool_chemistry_myths_2026-03-28` | Chemistry Myths knowledge base uploaded to OpenAI vector store |
+| `Pool Chemical Master List_2026-03-27` | Chemical knowledge base uploaded to OpenAI vector store |
+
 
 ---
 

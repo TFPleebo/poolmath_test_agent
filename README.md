@@ -1,46 +1,62 @@
-# PoolMath Advisor
+# PoolMath AI Advisor
 
-**Try it live → [tfpleebo.github.io/poolmath_test_agent](https://tfpleebo.github.io/poolmath_test_agent/)**
+**Try it live → [tfpleebo.github.io/poolmath_test_agent](https://tfpleebo.github.io/poolmath_test_agent)**
 
-An AI-powered pool chemistry coach built on the [Trouble Free Pool Care (TFP)](https://www.troublefreepool.com) methodology. Paste your Pool Math share code and get a plain-language read on your water — what's good, what needs attention, and exactly what to do next.
+A pool chemistry advisor built on the [Trouble Free Pool Care (TFP)](https://www.troublefreepool.com) methodology. Paste your Pool Math share code and get a plain-language read on your water — what's good, what needs attention, and exactly what to do next.
+
+> **Status: Early Access / Beta** — actively being tested and refined. Errors will occur.
 
 ---
 
 ## How It Works
 
-1. Open the [Pool Math app](https://www.poolmathapp.com), go to Settings → Share, enable sharing, and copy your link
+1. Open the **Pool Math app**, go to Settings → Share, enable sharing, and copy your link
 2. Paste the link or share code into the Advisor
 3. Get personalized, TFP-based advice in seconds
 
-The Advisor pulls your recent test history and chemical additions directly from Pool Math, checks each result against TFP targets, and respects data freshness — stale FC or pH readings are flagged rather than acted on.
+The Advisor pulls your recent test history and chemical additions directly from Pool Math and passes them through two layers:
+
+- **Deterministic ruleset** — a code-based set of rules evaluates each parameter against TFP targets, assigns severity levels (critical / warning / info), and determines the primary issue. No AI involved in this step.
+- **AI communication layer** — the coded results are handed to the AI, whose only job is to turn them into clear, plain-language advice the end user can actually act on.
+
+Data freshness is respected throughout — stale FC or pH readings are flagged rather than acted on.
 
 ---
 
 ## Stack
 
-- **Frontend** — Static HTML/CSS/JS hosted on GitHub Pages
-- **Proxy** — Cloudflare Worker (handles CORS and keeps the API key server-side)
-- **AI** — OpenAI Responses API with a stored system prompt and RAG via a vector store loaded with TFP pool chemistry knowledge
+| Layer | Technology |
+|---|---|
+| Frontend | Static HTML/CSS/JS hosted on GitHub Pages |
+| Proxy | Cloudflare Worker — handles CORS, keeps API key server-side |
+| AI | OpenAI Responses API with stored system prompt + RAG via vector store |
+| Knowledge | TFP pool chemistry knowledge base loaded into vector store |
 
 ---
 
-## Project Files
+## Privacy
 
-| File | Description |
-|------|-------------|
-| `index.html` | The entire frontend — single-file, no dependencies |
-| `worker.js` | Cloudflare Worker proxy |
-| `pool_chemistry_knowledge.md` | TFP general knowledge base uploaded to the OpenAI vector store |
-| `poolmath_system_prompt_v*.md` | Versioned system prompts |
-| `pool_csi_guide_2026-03-28` | CSI knowledge base uploaded to OpenAI vector store |
-| `pool_chemistry_myths_2026-03-28` | Chemistry Myths knowledge base uploaded to OpenAI vector store |
-| `Pool Chemical Master List_2026-03-27` | Chemical knowledge base uploaded to OpenAI vector store |
+Your pool data is sent to the Cloudflare Worker, which forwards it to the OpenAI API. Your API key is never exposed to the client. No data is stored or logged beyond what OpenAI retains per their standard policy.
 
+---
+
+## Known Limitations
+
+- Reads a **snapshot** of current data only — no memory of past tests or chemical additions
+- Weather and UV index are not yet factored into recommendations
+- Trend analysis (tracking changes over time) is not yet implemented
+- Cost controls and usage guardrails for public release are not yet in place
+
+---
+
+## Version History
+
+| Date | Prompt | Worker | Notes |
+|---|---|---|---|
+| April 5, 2026 | v25 | worker_updated.js | Initial live deployment |
 
 ---
 
 ## Notes
 
-- This is a TFP-methodology tool — it will never recommend algaecide, clarifier, flocculant, or pool store "shock"
-- Advice is based on your actual logged test data, not guesses
-- Always use your own judgment and the full [TFP resources](https://www.troublefreepool.com) for complex situations like a SLAM
+This repository may not always reflect the latest deployed code. The live tool and the files here can be out of sync during active development.

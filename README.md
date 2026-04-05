@@ -13,7 +13,7 @@ A pool chemistry advisor built on the [Trouble Free Pool Care (TFP)](https://www
 1. Open the **Pool Math app**, go to Settings → Share, enable sharing, and copy your link
 2. Paste the link or share code into the Advisor
 3. Get personalized, TFP-based advice in seconds
-4. The Advisor pulls your recent test history and chemical additions directly from Pool Math and passes them through two layers
+4. The Advisor pulls your recent test history directly from Pool Math and passes them through two layers
 
 Data freshness is respected throughout — stale FC or pH readings are flagged rather than acted on.
 

@@ -13,11 +13,7 @@ A pool chemistry advisor built on the [Trouble Free Pool Care (TFP)](https://www
 1. Open the **Pool Math app**, go to Settings → Share, enable sharing, and copy your link
 2. Paste the link or share code into the Advisor
 3. Get personalized, TFP-based advice in seconds
-
-The Advisor pulls your recent test history and chemical additions directly from Pool Math and passes them through two layers:
-
-- **Deterministic ruleset** — a code-based set of rules evaluates each parameter against TFP targets, assigns severity levels (critical / warning / info), and determines the primary issue. No AI involved in this step.
-- **AI communication layer** — the coded results are handed to the AI, whose only job is to turn them into clear, plain-language advice the end user can actually act on.
+4. The Advisor pulls your recent test history and chemical additions directly from Pool Math and passes them through two layers
 
 Data freshness is respected throughout — stale FC or pH readings are flagged rather than acted on.
 

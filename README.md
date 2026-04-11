@@ -1,6 +1,7 @@
 # PoolMath AI Advisor
 
 **Try it live → [tfpleebo.github.io/poolmath_test_agent](https://tfpleebo.github.io/poolmath_test_agent)**
+Version 2 https://tfpleebo.github.io/poolmath_test_agent/index_v2.html
 
 A pool chemistry advisor built on the [Trouble Free Pool Care (TFP)](https://www.troublefreepool.com) methodology. Paste your Pool Math share code and get a plain-language read on your water — what's good, what needs attention, and exactly what to do next.
 

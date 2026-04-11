@@ -1,59 +1,89 @@
 # PoolMath AI Advisor
 
-**Try it live → [tfpleebo.github.io/poolmath_test_agent](https://tfpleebo.github.io/poolmath_test_agent)**
-Version 2 https://tfpleebo.github.io/poolmath_test_agent/index_v2.html
+**Try it live → https://tfpleebo.github.io/poolmath_test_agent**  
+**Version 2 → https://tfpleebo.github.io/poolmath_test_agent/index_v2.html**
 
-A pool chemistry advisor built on the [Trouble Free Pool Care (TFP)](https://www.troublefreepool.com) methodology. Paste your Pool Math share code and get a plain-language read on your water — what's good, what needs attention, and exactly what to do next.
+A pool chemistry advisor built on the Trouble Free Pool Care (TFP) methodology.
 
-> **Status: Early Access / Beta** — actively being tested and refined. Errors will occur.
+Paste your PoolMath share code and get a simple, clear explanation of your water:
+- What’s good
+- What needs attention
+- What (if anything) to do next
 
----
-
-## How It Works
-
-1. Open the **Pool Math app**, go to Settings → Share, enable sharing, and copy your link
-2. Paste the link or share code into the Advisor
-3. Get personalized, TFP-based advice in seconds
-4. The Advisor pulls your recent test history directly from Pool Math and passes them through two layers
-
-Data freshness is respected throughout — stale FC or pH readings are flagged rather than acted on.
+> **Status: Early Access / Beta** — actively being refined. Expect occasional errors.
 
 ---
 
-## Stack
+# 🚀 What’s New in Version 2
 
-| Layer | Technology |
-|---|---|
-| Frontend | Static HTML/CSS/JS hosted on GitHub Pages |
-| Proxy | Cloudflare Worker — handles CORS, keeps API key server-side |
-| AI | OpenAI Responses API with stored system prompt + RAG via vector store |
-| Knowledge | TFP pool chemistry knowledge base loaded into vector store |
+Version 2 focuses on **clarity, consistency, and better guidance**.
 
----
-
-## Privacy
-
-Your pool data is sent to the Cloudflare Worker, which forwards it to the OpenAI API. Your API key is never exposed to the client. No data is stored or logged beyond what OpenAI retains per their standard policy.
+## Improvements
+- More consistent and reliable recommendations  
+- Clear prioritization of what matters most  
+- Reduced conflicting or overly complex advice  
+- Better handling of edge cases and unusual readings  
+- Improved tone — simpler, calmer, more actionable  
 
 ---
 
-## Known Limitations
+## 🧪 Built on TFPC Principles
 
-- Reads a **snapshot** of current data only — no memory of past tests or chemical additions
-- Weather and UV index are not yet factored into recommendations
-- Trend analysis (tracking changes over time) is not yet implemented
-- Cost controls and usage guardrails for public release are not yet in place
+Advice follows core Trouble Free Pool Care concepts:
 
----
-
-## Version History
-
-| Date | Prompt | Worker | Notes |
-|---|---|---|---|
-| April 5, 2026 | v25 | worker_updated.js | Initial live deployment |
+- **Sanitation always comes first** — proper chlorine levels are critical  
+- **Chlorine targets depend on CYA**, not fixed numbers  
+- **pH stability matters more than chasing exact numbers**  
+- **Total Alkalinity is a support factor**, not a primary target  
 
 ---
 
-## Notes
+## 📊 Better Decision Support
 
-This repository may not always reflect the latest deployed code. The live tool and the files here can be out of sync during active development.
+- Respects test accuracy and timing  
+- Avoids acting on outdated or questionable readings  
+- Reduces overcorrection and “chemical yo-yo” behavior  
+
+---
+
+# ⚙️ How to Use
+
+1. Open the **Pool Math app**
+2. Go to **Settings → Share**
+3. Enable sharing and copy your link
+4. Paste the link or share code into the Advisor
+5. Review your results
+
+---
+
+# 🔒 Privacy
+
+- Your pool data is processed securely  
+- No long-term storage of your pool data  
+- API keys are never exposed  
+
+---
+
+# ⚠️ Known Limitations
+
+- Uses a snapshot of your current data  
+- Does not yet track long-term trends  
+- Weather and UV impact not fully included  
+- Some edge cases may still produce imperfect guidance  
+
+---
+
+# 🧭 Version History
+
+| Date | Version | Notes |
+|---|---|---|
+| April 5, 2026 | V1 | Initial release |
+| April 10, 2026 | V2 | Improved clarity, prioritization, and consistency |
+
+---
+
+# 📝 Notes
+
+- This tool is actively evolving  
+- Outputs may change as improvements are made  
+- Always verify recommendations with your own testing  

@@ -96,6 +96,11 @@
       margin-right: auto;
     }
 
+    /* Spacing between stacked tagline paragraphs */
+    header .tagline + .tagline {
+      margin-top: 10px;
+    }
+
     .card {
       width: 100%;
       max-width: 640px;
@@ -190,8 +195,16 @@
 <script>
 const WORKER_URL = "https://pool-advisor-v2.9r568xhjmx.workers.dev";
 
+function extractUserId(raw) {
+  // Accept a bare ID ("tfp-458856") or a full PoolMath share/profile URL.
+  // Extracts the tfp-XXXXXX portion wherever it appears in the string.
+  const match = raw.match(/tfp-\d+/i);
+  return match ? match[0].toLowerCase() : raw;
+}
+
 async function analyze() {
-  const userId = document.getElementById("user-id").value.trim();
+  const raw      = document.getElementById("user-id").value.trim();
+  const userId   = extractUserId(raw);
   const response = document.getElementById("response-area");
 
   if (!userId) {
@@ -199,6 +212,9 @@ async function analyze() {
     response.innerHTML = "Enter a valid ID.";
     return;
   }
+
+  // Show the extracted ID in the input so the user knows what was used
+  document.getElementById("user-id").value = userId;
 
   response.style.display = "block";
   response.innerHTML = "Analyzing...";

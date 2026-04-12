@@ -132,6 +132,8 @@
       padding: 11px 14px;
       border: 1px solid #cbd5e1;
       border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
     }
 
     button {
@@ -227,7 +229,15 @@ async function analyze() {
     });
 
     const data = await res.json();
-    response.innerHTML = data.advice || "No data returned.";
+    // Convert plain-text paragraphs (separated by \n\n or \n) into HTML <p> blocks
+    // so the AI response renders with proper spacing instead of collapsing into one line.
+    const raw = data.advice || "No data returned.";
+    const formatted = raw
+      .split(/\n\n+/)                          // split on blank lines first
+      .map(block => block.replace(/\n/g, "<br>")) // soft line breaks within a block
+      .map(block => `<p style="margin-bottom:12px">${block}</p>`)
+      .join("");
+    response.innerHTML = formatted;
   } catch {
     response.innerHTML = "Error connecting.";
   }
